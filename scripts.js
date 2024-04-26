@@ -1,5 +1,14 @@
+function disable(btn) {
+  btn.disabled = true;
+  btn.classList.remove('--loading')
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   var form = document.getElementById("registrationForm");
+
+  const btn = form.querySelector('[js-submit]')
+  btn?.classList.add('--loading')
+
   form.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the form from submitting normally
 
@@ -16,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         // Handle response here if needed
         console.log("Registration successful");
+        disable(btn)
       })
       .catch((error) => {
         console.error("There was a problem with your registration:", error);
