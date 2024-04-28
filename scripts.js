@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var formData = new FormData(form); // Create FormData object to collect form data
 
+    const fullNumber = iti.getNumber()
+    formData.append("phone_full", fullNumber) 
+
     // Send the data to the API endpoint
     fetch("/api/v1/public/register", {
       method: "POST",
