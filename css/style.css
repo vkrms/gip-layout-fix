@@ -2279,6 +2279,33 @@ h1.heading {
     padding: 0;
     font-family: 'Cabin', sans-serif;
     border-radius: 8px;
+    position: relative;
+}
+
+.form__submit:before {
+    content: url(../images/spinner.svg);
+    position: absolute;
+    margin: auto;
+    width: 36px;
+    aspect-ratio: 1 / 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: all .3s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.form__submit.--loading {
+    color: transparent;
+    pointer-events: none;
+    cursor: progress;
+}
+
+.form__submit.--loading:before {
+    opacity: 1;
+    visibility: visible;
 }
 
 .form {
@@ -2353,4 +2380,13 @@ h1.heading {
 
 .footer__logo {
     margin: auto;
+}
+
+button {
+    transition: all .3s;
+}
+
+button[disabled] {
+  pointer-events: none;
+  opacity: 0.5;
 }

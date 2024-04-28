@@ -7,6 +7,8 @@ const fetchLocation = async () => {
   return data
 }
 
+let iti
+
 fetchLocation().then(data => {
     const code = data.country_code2.toLowerCase()
     
@@ -14,10 +16,16 @@ fetchLocation().then(data => {
 
     const input = document.querySelector("[js-phone-input]")
 
-    const iti = window.intlTelInput(input, {
+    iti = window.intlTelInput(input, {
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/19.2.19/js/utils.js",
         initialCountry: code,
-        showSelectedDialCode: true,        
-    //   utilsScript: "/intl-tel-input/js/utils.js?1707906286003" // just for formatting/placeholders etc
+        showSelectedDialCode: true,
+        hiddenInput: function () {
+            return {
+                phone: "phone_full",
+                country: "country_code"
+            };
+        }
     });    
 
     setBigFlag(code)

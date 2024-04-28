@@ -1,9 +1,21 @@
+function disable(btn) {
+  btn.disabled = true;
+  btn.classList.remove('--loading')
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   var form = document.getElementById("registrationForm");
+
+  const btn = form.querySelector('[js-submit]')
+  btn?.classList.add('--loading')
+
   form.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the form from submitting normally
 
     var formData = new FormData(form); // Create FormData object to collect form data
+
+    const fullNumber = iti.getNumber()
+    formData.append("phone_full", fullNumber) 
 
     // Send the data to the API endpoint
     fetch("/api/v1/public/register", {
@@ -16,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         // Handle response here if needed
         console.log("Registration successful");
+        disable(btn)
       })
       .catch((error) => {
         console.error("There was a problem with your registration:", error);
